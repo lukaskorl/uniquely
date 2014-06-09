@@ -1,0 +1,24 @@
+{
+    "name": "lukaskorl/uniquely",
+    "description": "Uniquely identified models for Laravel 4",
+    "type": "library",
+    "keywords": ["model", "uuid", "unique", "laravel"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lukas Korl",
+            "email": "hello@lukaskorl.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.*",
+        "rhumsaa/uuid": "2.7.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Lukaskorl\\Uniquely": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
