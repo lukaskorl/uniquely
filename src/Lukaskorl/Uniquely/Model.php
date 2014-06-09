@@ -13,8 +13,20 @@ abstract class Model extends Eloquent {
 
         static::creating(function($model)
         {
-            $model->{$model->getKeyName()} = (string)$model->generatePrimaryKey();
+            $model->generateAndSetUniquePrimaryKey();
         });
+
+        static::saving(function($model)
+        {
+            $model->generateAndSetUniquePrimaryKey();
+        });
+    }
+
+    public function generateAndSetUniquePrimaryKey()
+    {
+        if (! $this->{$this->getKeyName()}) {
+            $this->{$this->getKeyName()} = (string)$this->generatePrimaryKey();
+        }
     }
 
     public function generatePrimaryKey()
