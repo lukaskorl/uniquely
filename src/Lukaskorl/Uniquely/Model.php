@@ -7,29 +7,20 @@ abstract class Model extends Eloquent {
 
     public $incrementing = false;
 
-    public static function boot()
+    public function save(array $options = array())
     {
-        parent::boot();
-
-        static::creating(function($model)
-        {
-            $model->generateAndSetUniquePrimaryKey();
-        });
-
-        static::saving(function($model)
-        {
-            $model->generateAndSetUniquePrimaryKey();
-        });
+        $this->generatePrimaryKeyIfNotSet();
+        return parent::save($options);
     }
 
-    public function generateAndSetUniquePrimaryKey()
+    private function generatePrimaryKeyIfNotSet()
     {
         if (! $this->{$this->getKeyName()}) {
             $this->{$this->getKeyName()} = (string)$this->generatePrimaryKey();
         }
     }
 
-    public function generatePrimaryKey()
+    private function generatePrimaryKey()
     {
         return Uuid::uuid4();
     }
